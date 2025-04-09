@@ -7,10 +7,25 @@ export default {
   ],
   theme: {
     extend: {
+      colors:{
+        primary: "#7E3AF2",
+        secondary: "#D0A4FF",
+        
+      },
+      container: {
+        center: true,
+        padding:{
+          DEFAULT: "1rem",
+          sm: "2rem",
+          lg: "4rem",
+          xl: "5rem",
+          "2xl" : "6rem",
+        },
+      },
       fontFamily: {
         'sans': ['Inter', 'sans-serif']
-      }
-    }
+      },
+    },
   },
   
 }

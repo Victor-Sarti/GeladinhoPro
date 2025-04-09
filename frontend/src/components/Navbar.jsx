@@ -1,74 +1,73 @@
-import React from 'react'
-import { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-
-const NavBar = ({navOpen}) => {
-    const lastActiveLink  = useRef();
-    const activeBox = useRef();
-    const initActiveBox = () => {
-       console.log(lastActiveLink.current)
-       console.log(activeBox.current)
-       activeBox.current.style.top = lastActiveLink.current.offsetTop + 'px';
-       activeBox.current.style.left = lastActiveLink.current.offsetLeft + 'px';
-       activeBox.current.style.width = lastActiveLink.current.offsetWidth + 'px';
-       activeBox.current.style.height = lastActiveLink.current.offsetHeight + 'px';
-
-
-    }
-    
-    useEffect(initActiveBox, [])
-    window.addEventListener('resize',initActiveBox )
-    const activeCurrentLink = (event) => {
-      lastActiveLink.current?.classList.remove('active');
-      event.target.classList.add('active');
-      lastActiveLink.current = event.target;
-      activeBox.current.style.top = event.target.offsetTop + 'px';
-      activeBox.current.style.left = event.target.offsetLeft + 'px';
-      activeBox.current.style.width = event.target.offsetWidth + 'px';
-      activeBox.current.style.height = event.target.offsetHeight + 'px';
-    }
+import React from 'react';
+import logo from "../assets/logoG.svg";
+import { IoArrowDown } from "react-icons/io5"; // Importando o ícone de seta
 
 const navItems = [
-    {
-      label: 'Início',
-      link: '#home',
-      className: 'nav-link active',
-      ref: lastActiveLink
-    },
-    {
-      label: 'Sobre',
-      link: '#about',
-      className: 'nav-link'
-    },
-    {
-      label: 'Projetos',
-      link: '#work',
-      className: 'nav-link'
-    },
-    {
-      label: 'Contato',
-      link: '#contact',
-      className: 'nav-link'
-    },
-  ];
+  {
+    label: 'Início',
+    link: '#inicio',
+    className: 'nav-link active',
+  },
+  {
+    label: 'Sobre',
+    link: '#sobre',
+    className: 'nav-link',
+  },
+  {
+    label: 'Estoque',
+    link: '#estoque',
+    className: 'nav-link',
+  },
+  {
+    label: 'Registros',
+    link: '#registros',
+    className: 'nav-link',
+  },
+  {
+    label: 'Relatórios',
+    link: '#relatorios',
+    className: 'nav-link',
+  },
+];
 
-  NavBar.PropTypes = {
-    navOpen: PropTypes.bool.isRequired
-  
-  }
+export default function Navbar() {
   return (
-   <nav className={'navbar ' + (navOpen ? 'active' : '')}>
-    {
-        navItems.map(({label, link, className,ref}, key)=>(
-            <a href={link} key={key} ref={ref} className={className} onClick={activeCurrentLink}> {label}</a>
-        )) 
-    }
-      <div className="active-box" ref={activeBox}></div>
-  
-   </nav>
-  )
+    <>
+      <nav>
+        <div className='container flex justify-between items-center py-8'>
+          <div className='text-2xl flex items-center gap-2 font-bold'>
+            <img src={logo} alt="" />
+            <p>Geladinho <span className='text-primary'>Pro</span></p>
+          </div>
+
+          <div className='hidden md:block'>
+            <ul className='flex items-center gap-6 text-gray-600'>
+              {navItems.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <a 
+                      href={item.link}  
+                      className={`${item.className} inline-block py-1 px-3 hover:text-primary font-semibold`}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div>
+            <button className='text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200'>
+              <IoArrowDown className='' /> 
+            </button>
+            
+            <button className=' hover:bg-primary text-primary font-semibold hover:text-white rounded-md border-2 border-primary px-6 py-2 duration-200 hidden md:block'>
+              login
+            </button>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
 }
-
-
-
-export default NavBar
