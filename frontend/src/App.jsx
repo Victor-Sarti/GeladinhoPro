@@ -1,9 +1,10 @@
 import React from 'react'
+import Header from './components/Header'
 
 export default function App() {
   return (
-    <h1 className=' text-xl text-red-800'>
-      OI TUDO BEM      
-    </h1>
+   <>
+   <Header/>
+   </>
   )
 }
