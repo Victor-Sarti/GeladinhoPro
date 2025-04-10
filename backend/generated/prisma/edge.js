@@ -150,7 +150,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Maria Cardoso\\GeladinhoPro\\backend\\generated\\prisma",
+      "value": "C:\\Users\\Victo\\VS.CODE\\GeladinhoPro\\backend\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -164,12 +164,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Maria Cardoso\\GeladinhoPro\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Victo\\VS.CODE\\GeladinhoPro\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
@@ -178,11 +177,12 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:rapha_1910@localhost:3306/geladinhopro"
+        "value": null
       }
     }
   },
