@@ -1,6 +1,6 @@
 import React from 'react';
 import table from '../../assets/table.svg';
-import Button from '../Button/Button';
+import Button from '../comp/Button';
 
 const Hero = () => {
     return (

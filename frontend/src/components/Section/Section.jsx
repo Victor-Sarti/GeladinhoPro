@@ -20,7 +20,7 @@ const CheckIcon = () => (
 
 const Section = () => {
     return (
-        <section className='bg-slate-50 '>
+        <section className=  'bg-slate-50 '>
             <div className='flex flex-col md:flex-row items-center justify-between p-4 md:pl-28'>
                 <div className='flex flex-col gap-6 w-full md:w-2/3'>
                     <h1 className='font-semibold text-3xl'>Quem Somos?</h1>
