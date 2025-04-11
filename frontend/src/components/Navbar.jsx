@@ -37,7 +37,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav>
+      <nav className=' bg-slate-50 '>
         <div className='container flex justify-between items-center py-8'>
           <div className='text-2xl flex items-center gap-2 font-bold'>
             <img src={logo} alt="" />
