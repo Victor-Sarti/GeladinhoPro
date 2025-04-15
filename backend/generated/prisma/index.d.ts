@@ -1022,6 +1022,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type GeladinhoCountOutputType
+   */
+
+  export type GeladinhoCountOutputType = {
+    produto: number
+  }
+
+  export type GeladinhoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produto?: boolean | GeladinhoCountOutputTypeCountProdutoArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GeladinhoCountOutputType without action
+   */
+  export type GeladinhoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeladinhoCountOutputType
+     */
+    select?: GeladinhoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GeladinhoCountOutputType without action
+   */
+  export type GeladinhoCountOutputTypeCountProdutoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: produtoWhereInput
+  }
+
 
   /**
    * Models
@@ -2114,6 +2144,8 @@ export namespace Prisma {
     sabor?: boolean
     valor?: boolean
     criadoEm?: boolean
+    produto?: boolean | geladinho$produtoArgs<ExtArgs>
+    _count?: boolean | GeladinhoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["geladinho"]>
 
 
@@ -2126,10 +2158,16 @@ export namespace Prisma {
   }
 
   export type geladinhoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sabor" | "valor" | "criadoEm", ExtArgs["result"]["geladinho"]>
+  export type geladinhoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produto?: boolean | geladinho$produtoArgs<ExtArgs>
+    _count?: boolean | GeladinhoCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $geladinhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "geladinho"
-    objects: {}
+    objects: {
+      produto: Prisma.$produtoPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       sabor: string
@@ -2475,6 +2513,7 @@ export namespace Prisma {
    */
   export interface Prisma__geladinhoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    produto<T extends geladinho$produtoArgs<ExtArgs> = {}>(args?: Subset<T, geladinho$produtoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$produtoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2525,6 +2564,10 @@ export namespace Prisma {
      */
     omit?: geladinhoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
+    /**
      * Filter, which geladinho to fetch.
      */
     where: geladinhoWhereUniqueInput
@@ -2543,6 +2586,10 @@ export namespace Prisma {
      */
     omit?: geladinhoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
+    /**
      * Filter, which geladinho to fetch.
      */
     where: geladinhoWhereUniqueInput
@@ -2560,6 +2607,10 @@ export namespace Prisma {
      * Omit specific fields from the geladinho
      */
     omit?: geladinhoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
     /**
      * Filter, which geladinho to fetch.
      */
@@ -2609,6 +2660,10 @@ export namespace Prisma {
      */
     omit?: geladinhoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
+    /**
      * Filter, which geladinho to fetch.
      */
     where?: geladinhoWhereInput
@@ -2657,6 +2712,10 @@ export namespace Prisma {
      */
     omit?: geladinhoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
+    /**
      * Filter, which geladinhos to fetch.
      */
     where?: geladinhoWhereInput
@@ -2700,6 +2759,10 @@ export namespace Prisma {
      */
     omit?: geladinhoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
+    /**
      * The data needed to create a geladinho.
      */
     data: XOR<geladinhoCreateInput, geladinhoUncheckedCreateInput>
@@ -2728,6 +2791,10 @@ export namespace Prisma {
      * Omit specific fields from the geladinho
      */
     omit?: geladinhoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
     /**
      * The data needed to update a geladinho.
      */
@@ -2769,6 +2836,10 @@ export namespace Prisma {
      */
     omit?: geladinhoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
+    /**
      * The filter to search for the geladinho to update in case it exists.
      */
     where: geladinhoWhereUniqueInput
@@ -2795,6 +2866,10 @@ export namespace Prisma {
      */
     omit?: geladinhoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
+    /**
      * Filter which geladinho to delete.
      */
     where: geladinhoWhereUniqueInput
@@ -2815,6 +2890,30 @@ export namespace Prisma {
   }
 
   /**
+   * geladinho.produto
+   */
+  export type geladinho$produtoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the produto
+     */
+    select?: produtoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the produto
+     */
+    omit?: produtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
+    where?: produtoWhereInput
+    orderBy?: produtoOrderByWithRelationInput | produtoOrderByWithRelationInput[]
+    cursor?: produtoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProdutoScalarFieldEnum | ProdutoScalarFieldEnum[]
+  }
+
+  /**
    * geladinho without action
    */
   export type geladinhoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2826,6 +2925,10 @@ export namespace Prisma {
      * Omit specific fields from the geladinho
      */
     omit?: geladinhoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: geladinhoInclude<ExtArgs> | null
   }
 
 
@@ -2845,12 +2948,14 @@ export namespace Prisma {
     id: number | null
     quantidade: number | null
     valor: Decimal | null
+    idGeladinho: number | null
   }
 
   export type ProdutoSumAggregateOutputType = {
     id: number | null
     quantidade: number | null
     valor: Decimal | null
+    idGeladinho: number | null
   }
 
   export type ProdutoMinAggregateOutputType = {
@@ -2858,6 +2963,7 @@ export namespace Prisma {
     nome: string | null
     quantidade: number | null
     valor: Decimal | null
+    idGeladinho: number | null
   }
 
   export type ProdutoMaxAggregateOutputType = {
@@ -2865,6 +2971,7 @@ export namespace Prisma {
     nome: string | null
     quantidade: number | null
     valor: Decimal | null
+    idGeladinho: number | null
   }
 
   export type ProdutoCountAggregateOutputType = {
@@ -2872,6 +2979,7 @@ export namespace Prisma {
     nome: number
     quantidade: number
     valor: number
+    idGeladinho: number
     _all: number
   }
 
@@ -2880,12 +2988,14 @@ export namespace Prisma {
     id?: true
     quantidade?: true
     valor?: true
+    idGeladinho?: true
   }
 
   export type ProdutoSumAggregateInputType = {
     id?: true
     quantidade?: true
     valor?: true
+    idGeladinho?: true
   }
 
   export type ProdutoMinAggregateInputType = {
@@ -2893,6 +3003,7 @@ export namespace Prisma {
     nome?: true
     quantidade?: true
     valor?: true
+    idGeladinho?: true
   }
 
   export type ProdutoMaxAggregateInputType = {
@@ -2900,6 +3011,7 @@ export namespace Prisma {
     nome?: true
     quantidade?: true
     valor?: true
+    idGeladinho?: true
   }
 
   export type ProdutoCountAggregateInputType = {
@@ -2907,6 +3019,7 @@ export namespace Prisma {
     nome?: true
     quantidade?: true
     valor?: true
+    idGeladinho?: true
     _all?: true
   }
 
@@ -3001,6 +3114,7 @@ export namespace Prisma {
     nome: string
     quantidade: number
     valor: Decimal
+    idGeladinho: number
     _count: ProdutoCountAggregateOutputType | null
     _avg: ProdutoAvgAggregateOutputType | null
     _sum: ProdutoSumAggregateOutputType | null
@@ -3027,6 +3141,8 @@ export namespace Prisma {
     nome?: boolean
     quantidade?: boolean
     valor?: boolean
+    idGeladinho?: boolean
+    geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto"]>
 
 
@@ -3036,18 +3152,25 @@ export namespace Prisma {
     nome?: boolean
     quantidade?: boolean
     valor?: boolean
+    idGeladinho?: boolean
   }
 
-  export type produtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "quantidade" | "valor", ExtArgs["result"]["produto"]>
+  export type produtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "quantidade" | "valor" | "idGeladinho", ExtArgs["result"]["produto"]>
+  export type produtoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
+  }
 
   export type $produtoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "produto"
-    objects: {}
+    objects: {
+      geladinhos: Prisma.$geladinhoPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nome: string
       quantidade: number
       valor: Prisma.Decimal
+      idGeladinho: number
     }, ExtArgs["result"]["produto"]>
     composites: {}
   }
@@ -3388,6 +3511,7 @@ export namespace Prisma {
    */
   export interface Prisma__produtoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    geladinhos<T extends geladinhoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, geladinhoDefaultArgs<ExtArgs>>): Prisma__geladinhoClient<$Result.GetResult<Prisma.$geladinhoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3421,6 +3545,7 @@ export namespace Prisma {
     readonly nome: FieldRef<"produto", 'String'>
     readonly quantidade: FieldRef<"produto", 'Int'>
     readonly valor: FieldRef<"produto", 'Decimal'>
+    readonly idGeladinho: FieldRef<"produto", 'Int'>
   }
     
 
@@ -3437,6 +3562,10 @@ export namespace Prisma {
      * Omit specific fields from the produto
      */
     omit?: produtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
     /**
      * Filter, which produto to fetch.
      */
@@ -3456,6 +3585,10 @@ export namespace Prisma {
      */
     omit?: produtoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
+    /**
      * Filter, which produto to fetch.
      */
     where: produtoWhereUniqueInput
@@ -3473,6 +3606,10 @@ export namespace Prisma {
      * Omit specific fields from the produto
      */
     omit?: produtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
     /**
      * Filter, which produto to fetch.
      */
@@ -3522,6 +3659,10 @@ export namespace Prisma {
      */
     omit?: produtoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
+    /**
      * Filter, which produto to fetch.
      */
     where?: produtoWhereInput
@@ -3570,6 +3711,10 @@ export namespace Prisma {
      */
     omit?: produtoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
+    /**
      * Filter, which produtos to fetch.
      */
     where?: produtoWhereInput
@@ -3613,6 +3758,10 @@ export namespace Prisma {
      */
     omit?: produtoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
+    /**
      * The data needed to create a produto.
      */
     data: XOR<produtoCreateInput, produtoUncheckedCreateInput>
@@ -3641,6 +3790,10 @@ export namespace Prisma {
      * Omit specific fields from the produto
      */
     omit?: produtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
     /**
      * The data needed to update a produto.
      */
@@ -3682,6 +3835,10 @@ export namespace Prisma {
      */
     omit?: produtoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
+    /**
      * The filter to search for the produto to update in case it exists.
      */
     where: produtoWhereUniqueInput
@@ -3707,6 +3864,10 @@ export namespace Prisma {
      * Omit specific fields from the produto
      */
     omit?: produtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
     /**
      * Filter which produto to delete.
      */
@@ -3739,6 +3900,10 @@ export namespace Prisma {
      * Omit specific fields from the produto
      */
     omit?: produtoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoInclude<ExtArgs> | null
   }
 
 
@@ -3782,7 +3947,8 @@ export namespace Prisma {
     id: 'id',
     nome: 'nome',
     quantidade: 'quantidade',
-    valor: 'valor'
+    valor: 'valor',
+    idGeladinho: 'idGeladinho'
   };
 
   export type ProdutoScalarFieldEnum = (typeof ProdutoScalarFieldEnum)[keyof typeof ProdutoScalarFieldEnum]
@@ -3930,6 +4096,7 @@ export namespace Prisma {
     sabor?: StringFilter<"geladinho"> | string
     valor?: DecimalFilter<"geladinho"> | Decimal | DecimalJsLike | number | string
     criadoEm?: DateTimeFilter<"geladinho"> | Date | string
+    produto?: ProdutoListRelationFilter
   }
 
   export type geladinhoOrderByWithRelationInput = {
@@ -3937,6 +4104,7 @@ export namespace Prisma {
     sabor?: SortOrder
     valor?: SortOrder
     criadoEm?: SortOrder
+    produto?: produtoOrderByRelationAggregateInput
     _relevance?: geladinhoOrderByRelevanceInput
   }
 
@@ -3948,6 +4116,7 @@ export namespace Prisma {
     sabor?: StringFilter<"geladinho"> | string
     valor?: DecimalFilter<"geladinho"> | Decimal | DecimalJsLike | number | string
     criadoEm?: DateTimeFilter<"geladinho"> | Date | string
+    produto?: ProdutoListRelationFilter
   }, "id">
 
   export type geladinhoOrderByWithAggregationInput = {
@@ -3980,6 +4149,8 @@ export namespace Prisma {
     nome?: StringFilter<"produto"> | string
     quantidade?: IntFilter<"produto"> | number
     valor?: DecimalFilter<"produto"> | Decimal | DecimalJsLike | number | string
+    idGeladinho?: IntFilter<"produto"> | number
+    geladinhos?: XOR<GeladinhoScalarRelationFilter, geladinhoWhereInput>
   }
 
   export type produtoOrderByWithRelationInput = {
@@ -3987,6 +4158,8 @@ export namespace Prisma {
     nome?: SortOrder
     quantidade?: SortOrder
     valor?: SortOrder
+    idGeladinho?: SortOrder
+    geladinhos?: geladinhoOrderByWithRelationInput
     _relevance?: produtoOrderByRelevanceInput
   }
 
@@ -3998,6 +4171,8 @@ export namespace Prisma {
     nome?: StringFilter<"produto"> | string
     quantidade?: IntFilter<"produto"> | number
     valor?: DecimalFilter<"produto"> | Decimal | DecimalJsLike | number | string
+    idGeladinho?: IntFilter<"produto"> | number
+    geladinhos?: XOR<GeladinhoScalarRelationFilter, geladinhoWhereInput>
   }, "id">
 
   export type produtoOrderByWithAggregationInput = {
@@ -4005,6 +4180,7 @@ export namespace Prisma {
     nome?: SortOrder
     quantidade?: SortOrder
     valor?: SortOrder
+    idGeladinho?: SortOrder
     _count?: produtoCountOrderByAggregateInput
     _avg?: produtoAvgOrderByAggregateInput
     _max?: produtoMaxOrderByAggregateInput
@@ -4020,6 +4196,7 @@ export namespace Prisma {
     nome?: StringWithAggregatesFilter<"produto"> | string
     quantidade?: IntWithAggregatesFilter<"produto"> | number
     valor?: DecimalWithAggregatesFilter<"produto"> | Decimal | DecimalJsLike | number | string
+    idGeladinho?: IntWithAggregatesFilter<"produto"> | number
   }
 
   export type cadastroCreateInput = {
@@ -4089,6 +4266,7 @@ export namespace Prisma {
     sabor: string
     valor: Decimal | DecimalJsLike | number | string
     criadoEm?: Date | string
+    produto?: produtoCreateNestedManyWithoutGeladinhosInput
   }
 
   export type geladinhoUncheckedCreateInput = {
@@ -4096,12 +4274,14 @@ export namespace Prisma {
     sabor: string
     valor: Decimal | DecimalJsLike | number | string
     criadoEm?: Date | string
+    produto?: produtoUncheckedCreateNestedManyWithoutGeladinhosInput
   }
 
   export type geladinhoUpdateInput = {
     sabor?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    produto?: produtoUpdateManyWithoutGeladinhosNestedInput
   }
 
   export type geladinhoUncheckedUpdateInput = {
@@ -4109,6 +4289,7 @@ export namespace Prisma {
     sabor?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    produto?: produtoUncheckedUpdateManyWithoutGeladinhosNestedInput
   }
 
   export type geladinhoCreateManyInput = {
@@ -4135,6 +4316,7 @@ export namespace Prisma {
     nome: string
     quantidade: number
     valor: Decimal | DecimalJsLike | number | string
+    geladinhos: geladinhoCreateNestedOneWithoutProdutoInput
   }
 
   export type produtoUncheckedCreateInput = {
@@ -4142,12 +4324,14 @@ export namespace Prisma {
     nome: string
     quantidade: number
     valor: Decimal | DecimalJsLike | number | string
+    idGeladinho: number
   }
 
   export type produtoUpdateInput = {
     nome?: StringFieldUpdateOperationsInput | string
     quantidade?: IntFieldUpdateOperationsInput | number
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    geladinhos?: geladinhoUpdateOneRequiredWithoutProdutoNestedInput
   }
 
   export type produtoUncheckedUpdateInput = {
@@ -4155,6 +4339,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     quantidade?: IntFieldUpdateOperationsInput | number
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idGeladinho?: IntFieldUpdateOperationsInput | number
   }
 
   export type produtoCreateManyInput = {
@@ -4162,6 +4347,7 @@ export namespace Prisma {
     nome: string
     quantidade: number
     valor: Decimal | DecimalJsLike | number | string
+    idGeladinho: number
   }
 
   export type produtoUpdateManyMutationInput = {
@@ -4175,6 +4361,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     quantidade?: IntFieldUpdateOperationsInput | number
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    idGeladinho?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4290,6 +4477,16 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type ProdutoListRelationFilter = {
+    every?: produtoWhereInput
+    some?: produtoWhereInput
+    none?: produtoWhereInput
+  }
+
+  export type produtoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type geladinhoOrderByRelevanceInput = {
     fields: geladinhoOrderByRelevanceFieldEnum | geladinhoOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -4359,6 +4556,11 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type GeladinhoScalarRelationFilter = {
+    is?: geladinhoWhereInput
+    isNot?: geladinhoWhereInput
+  }
+
   export type produtoOrderByRelevanceInput = {
     fields: produtoOrderByRelevanceFieldEnum | produtoOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -4370,12 +4572,14 @@ export namespace Prisma {
     nome?: SortOrder
     quantidade?: SortOrder
     valor?: SortOrder
+    idGeladinho?: SortOrder
   }
 
   export type produtoAvgOrderByAggregateInput = {
     id?: SortOrder
     quantidade?: SortOrder
     valor?: SortOrder
+    idGeladinho?: SortOrder
   }
 
   export type produtoMaxOrderByAggregateInput = {
@@ -4383,6 +4587,7 @@ export namespace Prisma {
     nome?: SortOrder
     quantidade?: SortOrder
     valor?: SortOrder
+    idGeladinho?: SortOrder
   }
 
   export type produtoMinOrderByAggregateInput = {
@@ -4390,12 +4595,14 @@ export namespace Prisma {
     nome?: SortOrder
     quantidade?: SortOrder
     valor?: SortOrder
+    idGeladinho?: SortOrder
   }
 
   export type produtoSumOrderByAggregateInput = {
     id?: SortOrder
     quantidade?: SortOrder
     valor?: SortOrder
+    idGeladinho?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -4406,6 +4613,20 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type produtoCreateNestedManyWithoutGeladinhosInput = {
+    create?: XOR<produtoCreateWithoutGeladinhosInput, produtoUncheckedCreateWithoutGeladinhosInput> | produtoCreateWithoutGeladinhosInput[] | produtoUncheckedCreateWithoutGeladinhosInput[]
+    connectOrCreate?: produtoCreateOrConnectWithoutGeladinhosInput | produtoCreateOrConnectWithoutGeladinhosInput[]
+    createMany?: produtoCreateManyGeladinhosInputEnvelope
+    connect?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+  }
+
+  export type produtoUncheckedCreateNestedManyWithoutGeladinhosInput = {
+    create?: XOR<produtoCreateWithoutGeladinhosInput, produtoUncheckedCreateWithoutGeladinhosInput> | produtoCreateWithoutGeladinhosInput[] | produtoUncheckedCreateWithoutGeladinhosInput[]
+    connectOrCreate?: produtoCreateOrConnectWithoutGeladinhosInput | produtoCreateOrConnectWithoutGeladinhosInput[]
+    createMany?: produtoCreateManyGeladinhosInputEnvelope
+    connect?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+  }
+
   export type DecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
@@ -4414,12 +4635,54 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
+  export type produtoUpdateManyWithoutGeladinhosNestedInput = {
+    create?: XOR<produtoCreateWithoutGeladinhosInput, produtoUncheckedCreateWithoutGeladinhosInput> | produtoCreateWithoutGeladinhosInput[] | produtoUncheckedCreateWithoutGeladinhosInput[]
+    connectOrCreate?: produtoCreateOrConnectWithoutGeladinhosInput | produtoCreateOrConnectWithoutGeladinhosInput[]
+    upsert?: produtoUpsertWithWhereUniqueWithoutGeladinhosInput | produtoUpsertWithWhereUniqueWithoutGeladinhosInput[]
+    createMany?: produtoCreateManyGeladinhosInputEnvelope
+    set?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    disconnect?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    delete?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    connect?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    update?: produtoUpdateWithWhereUniqueWithoutGeladinhosInput | produtoUpdateWithWhereUniqueWithoutGeladinhosInput[]
+    updateMany?: produtoUpdateManyWithWhereWithoutGeladinhosInput | produtoUpdateManyWithWhereWithoutGeladinhosInput[]
+    deleteMany?: produtoScalarWhereInput | produtoScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type produtoUncheckedUpdateManyWithoutGeladinhosNestedInput = {
+    create?: XOR<produtoCreateWithoutGeladinhosInput, produtoUncheckedCreateWithoutGeladinhosInput> | produtoCreateWithoutGeladinhosInput[] | produtoUncheckedCreateWithoutGeladinhosInput[]
+    connectOrCreate?: produtoCreateOrConnectWithoutGeladinhosInput | produtoCreateOrConnectWithoutGeladinhosInput[]
+    upsert?: produtoUpsertWithWhereUniqueWithoutGeladinhosInput | produtoUpsertWithWhereUniqueWithoutGeladinhosInput[]
+    createMany?: produtoCreateManyGeladinhosInputEnvelope
+    set?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    disconnect?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    delete?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    connect?: produtoWhereUniqueInput | produtoWhereUniqueInput[]
+    update?: produtoUpdateWithWhereUniqueWithoutGeladinhosInput | produtoUpdateWithWhereUniqueWithoutGeladinhosInput[]
+    updateMany?: produtoUpdateManyWithWhereWithoutGeladinhosInput | produtoUpdateManyWithWhereWithoutGeladinhosInput[]
+    deleteMany?: produtoScalarWhereInput | produtoScalarWhereInput[]
+  }
+
+  export type geladinhoCreateNestedOneWithoutProdutoInput = {
+    create?: XOR<geladinhoCreateWithoutProdutoInput, geladinhoUncheckedCreateWithoutProdutoInput>
+    connectOrCreate?: geladinhoCreateOrConnectWithoutProdutoInput
+    connect?: geladinhoWhereUniqueInput
+  }
+
+  export type geladinhoUpdateOneRequiredWithoutProdutoNestedInput = {
+    create?: XOR<geladinhoCreateWithoutProdutoInput, geladinhoUncheckedCreateWithoutProdutoInput>
+    connectOrCreate?: geladinhoCreateOrConnectWithoutProdutoInput
+    upsert?: geladinhoUpsertWithoutProdutoInput
+    connect?: geladinhoWhereUniqueInput
+    update?: XOR<XOR<geladinhoUpdateToOneWithWhereWithoutProdutoInput, geladinhoUpdateWithoutProdutoInput>, geladinhoUncheckedUpdateWithoutProdutoInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -4543,6 +4806,125 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type produtoCreateWithoutGeladinhosInput = {
+    nome: string
+    quantidade: number
+    valor: Decimal | DecimalJsLike | number | string
+  }
+
+  export type produtoUncheckedCreateWithoutGeladinhosInput = {
+    id?: number
+    nome: string
+    quantidade: number
+    valor: Decimal | DecimalJsLike | number | string
+  }
+
+  export type produtoCreateOrConnectWithoutGeladinhosInput = {
+    where: produtoWhereUniqueInput
+    create: XOR<produtoCreateWithoutGeladinhosInput, produtoUncheckedCreateWithoutGeladinhosInput>
+  }
+
+  export type produtoCreateManyGeladinhosInputEnvelope = {
+    data: produtoCreateManyGeladinhosInput | produtoCreateManyGeladinhosInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type produtoUpsertWithWhereUniqueWithoutGeladinhosInput = {
+    where: produtoWhereUniqueInput
+    update: XOR<produtoUpdateWithoutGeladinhosInput, produtoUncheckedUpdateWithoutGeladinhosInput>
+    create: XOR<produtoCreateWithoutGeladinhosInput, produtoUncheckedCreateWithoutGeladinhosInput>
+  }
+
+  export type produtoUpdateWithWhereUniqueWithoutGeladinhosInput = {
+    where: produtoWhereUniqueInput
+    data: XOR<produtoUpdateWithoutGeladinhosInput, produtoUncheckedUpdateWithoutGeladinhosInput>
+  }
+
+  export type produtoUpdateManyWithWhereWithoutGeladinhosInput = {
+    where: produtoScalarWhereInput
+    data: XOR<produtoUpdateManyMutationInput, produtoUncheckedUpdateManyWithoutGeladinhosInput>
+  }
+
+  export type produtoScalarWhereInput = {
+    AND?: produtoScalarWhereInput | produtoScalarWhereInput[]
+    OR?: produtoScalarWhereInput[]
+    NOT?: produtoScalarWhereInput | produtoScalarWhereInput[]
+    id?: IntFilter<"produto"> | number
+    nome?: StringFilter<"produto"> | string
+    quantidade?: IntFilter<"produto"> | number
+    valor?: DecimalFilter<"produto"> | Decimal | DecimalJsLike | number | string
+    idGeladinho?: IntFilter<"produto"> | number
+  }
+
+  export type geladinhoCreateWithoutProdutoInput = {
+    sabor: string
+    valor: Decimal | DecimalJsLike | number | string
+    criadoEm?: Date | string
+  }
+
+  export type geladinhoUncheckedCreateWithoutProdutoInput = {
+    id?: number
+    sabor: string
+    valor: Decimal | DecimalJsLike | number | string
+    criadoEm?: Date | string
+  }
+
+  export type geladinhoCreateOrConnectWithoutProdutoInput = {
+    where: geladinhoWhereUniqueInput
+    create: XOR<geladinhoCreateWithoutProdutoInput, geladinhoUncheckedCreateWithoutProdutoInput>
+  }
+
+  export type geladinhoUpsertWithoutProdutoInput = {
+    update: XOR<geladinhoUpdateWithoutProdutoInput, geladinhoUncheckedUpdateWithoutProdutoInput>
+    create: XOR<geladinhoCreateWithoutProdutoInput, geladinhoUncheckedCreateWithoutProdutoInput>
+    where?: geladinhoWhereInput
+  }
+
+  export type geladinhoUpdateToOneWithWhereWithoutProdutoInput = {
+    where?: geladinhoWhereInput
+    data: XOR<geladinhoUpdateWithoutProdutoInput, geladinhoUncheckedUpdateWithoutProdutoInput>
+  }
+
+  export type geladinhoUpdateWithoutProdutoInput = {
+    sabor?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type geladinhoUncheckedUpdateWithoutProdutoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sabor?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type produtoCreateManyGeladinhosInput = {
+    id?: number
+    nome: string
+    quantidade: number
+    valor: Decimal | DecimalJsLike | number | string
+  }
+
+  export type produtoUpdateWithoutGeladinhosInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type produtoUncheckedUpdateWithoutGeladinhosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type produtoUncheckedUpdateManyWithoutGeladinhosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    quantidade?: IntFieldUpdateOperationsInput | number
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
 

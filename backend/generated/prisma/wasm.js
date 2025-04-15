@@ -137,7 +137,8 @@ exports.Prisma.ProdutoScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
   quantidade: 'quantidade',
-  valor: 'valor'
+  valor: 'valor',
+  idGeladinho: 'idGeladinho'
 };
 
 exports.Prisma.SortOrder = {

@@ -24,15 +24,18 @@ model cadastro {
 }
 
 model geladinho {
-  id       Int      @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   sabor    String
   valor    Decimal
-  criadoEm DateTime @default(now())
+  criadoEm DateTime  @default(now())
+  produto  produto[] @relation("produtos")
 }
 
 model produto {
-  id         Int     @id @default(autoincrement())
-  nome       String
-  quantidade Int
-  valor      Decimal
+  id          Int       @id @default(autoincrement())
+  nome        String
+  quantidade  Int
+  valor       Decimal
+  idGeladinho Int
+  geladinhos  geladinho @relation("produtos", fields: [idGeladinho], references: [id], onDelete: Cascade)
 }
