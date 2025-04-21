@@ -38,11 +38,10 @@ export default function Navbar() {
 
  
     const location = useLocation();
-  
-    if (location.pathname === '/login') {
-      return null; // Não renderiza o Navbar na página de login
+    if (location.pathname !== '/') {
+      return null;
     }
-
+    
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const handleLoginClick = () => {
@@ -83,7 +82,7 @@ export default function Navbar() {
             
 
             <button onClick={handleLoginClick} className=' bg-primary hover:bg-white text-white font-semibold hover:text-primary rounded-md border-2 border-primary px-6 py-2 duration-200 hidden md:block'>
-              login
+              ADM
             </button>           
           </div>
 
