@@ -3,6 +3,8 @@ import logo from "../assets/logoG.svg";
 import { IoArrowDown } from "react-icons/io5"; 
 import { MdMenu } from 'react-icons/md';
 import ResponsiveMenu from './ResponsiveMenu';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const navItems = [
   {
@@ -33,7 +35,19 @@ const navItems = [
 ];
 
 export default function Navbar() {
+
+ 
+    const location = useLocation();
+  
+    if (location.pathname === '/login') {
+      return null; // Não renderiza o Navbar na página de login
+    }
+
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const handleLoginClick = () => {
+    navigate('/login')
+  }
 
   return (
     <>
@@ -66,11 +80,9 @@ export default function Navbar() {
               <IoArrowDown className='' /> 
             </button>
             
-            <button className=' hover:bg-secondary text-secondary font-semibold hover:text-white rounded-md border-2 border-secondary px-6 py-2 duration-200 hidden md:block'>
-              cadastre
-            </button>
+            
 
-            <button className=' bg-primary hover:bg-white text-white font-semibold hover:text-primary rounded-md border-2 border-primary px-6 py-2 duration-200 hidden md:block'>
+            <button onClick={handleLoginClick} className=' bg-primary hover:bg-white text-white font-semibold hover:text-primary rounded-md border-2 border-primary px-6 py-2 duration-200 hidden md:block'>
               login
             </button>           
           </div>
