@@ -111,9 +111,6 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -144,22 +141,6 @@ exports.Prisma.ProdutoScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.cadastroOrderByRelevanceFieldEnum = {
-  id: 'id',
-  nome: 'nome',
-  sobrenome: 'sobrenome',
-  email: 'email',
-  senha: 'senha'
-};
-
-exports.Prisma.geladinhoOrderByRelevanceFieldEnum = {
-  sabor: 'sabor'
-};
-
-exports.Prisma.produtoOrderByRelevanceFieldEnum = {
-  nome: 'nome'
 };
 
 

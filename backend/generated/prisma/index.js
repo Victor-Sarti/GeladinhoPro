@@ -84,9 +84,6 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -119,22 +116,6 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.cadastroOrderByRelevanceFieldEnum = {
-  id: 'id',
-  nome: 'nome',
-  sobrenome: 'sobrenome',
-  email: 'email',
-  senha: 'senha'
-};
-
-exports.Prisma.geladinhoOrderByRelevanceFieldEnum = {
-  sabor: 'sabor'
-};
-
-exports.Prisma.produtoOrderByRelevanceFieldEnum = {
-  nome: 'nome'
-};
-
 
 exports.Prisma.ModelName = {
   cadastro: 'cadastro',
@@ -152,7 +133,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Maria Cardoso\\GeladinhoPro\\backend\\generated\\prisma",
+      "value": "C:\\Users\\Victo\\VS.CODE\\GeladinhoPro\\backend\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -166,12 +147,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Maria Cardoso\\GeladinhoPro\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Victo\\VS.CODE\\GeladinhoPro\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
@@ -179,17 +159,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
+  "activeProvider": "sqlite",
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:rapha_1910@localhost:3306/geladinhopro"
+        "value": "file:./dev.db"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel cadastro {\n  id        String   @id @default(uuid())\n  nome      String\n  sobrenome String\n  email     String\n  senha     String\n  criadoEm  DateTime @default(now())\n}\n\nmodel geladinho {\n  id       Int       @id @default(autoincrement())\n  sabor    String\n  valor    Decimal\n  criadoEm DateTime  @default(now())\n  produto  produto[] @relation(\"produtos\")\n}\n\nmodel produto {\n  id          Int       @id @default(autoincrement())\n  nome        String\n  quantidade  Int\n  valor       Decimal\n  idGeladinho Int\n  geladinhos  geladinho @relation(\"produtos\", fields: [idGeladinho], references: [id], onDelete: Cascade)\n}\n",
-  "inlineSchemaHash": "a94019df6f397fa9117ab00595b5af16904482f593dd34f2b5465928bd4ac7fe",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel cadastro {\n  id        String   @id @default(uuid())\n  nome      String\n  sobrenome String\n  email     String\n  senha     String\n  criadoEm  DateTime @default(now())\n}\n\nmodel geladinho {\n  id       Int       @id @default(autoincrement())\n  sabor    String\n  valor    Decimal\n  criadoEm DateTime  @default(now())\n  produto  produto[] @relation(\"produtos\")\n}\n\nmodel produto {\n  id          Int       @id @default(autoincrement())\n  nome        String\n  quantidade  Int\n  valor       Decimal\n  idGeladinho Int\n  geladinhos  geladinho @relation(\"produtos\", fields: [idGeladinho], references: [id], onDelete: Cascade)\n}\n",
+  "inlineSchemaHash": "d93bcdca7b79c959e3c18a30c93f15ab6cc3b84000b673950dadb43a555ffbdb",
   "copyEngine": true
 }
 
@@ -198,8 +178,8 @@ const fs = require('fs')
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   const alternativePaths = [
+    "../generated/prisma",
     "generated/prisma",
-    "prisma",
   ]
   
   const alternativePath = alternativePaths.find((altPath) => {
@@ -229,7 +209,7 @@ Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "generated/prisma/query_engine-windows.dll.node")
+path.join(process.cwd(), "../generated/prisma/query_engine-windows.dll.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "generated/prisma/schema.prisma")
+path.join(process.cwd(), "../generated/prisma/schema.prisma")

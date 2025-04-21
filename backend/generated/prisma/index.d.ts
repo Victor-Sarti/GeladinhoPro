@@ -680,6 +680,10 @@ export namespace Prisma {
             args: Prisma.cadastroCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.cadastroCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cadastroPayload>[]
+          }
           delete: {
             args: Prisma.cadastroDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$cadastroPayload>
@@ -695,6 +699,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.cadastroUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.cadastroUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$cadastroPayload>[]
           }
           upsert: {
             args: Prisma.cadastroUpsertArgs<ExtArgs>
@@ -746,6 +754,10 @@ export namespace Prisma {
             args: Prisma.geladinhoCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.geladinhoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$geladinhoPayload>[]
+          }
           delete: {
             args: Prisma.geladinhoDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$geladinhoPayload>
@@ -761,6 +773,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.geladinhoUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.geladinhoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$geladinhoPayload>[]
           }
           upsert: {
             args: Prisma.geladinhoUpsertArgs<ExtArgs>
@@ -812,6 +828,10 @@ export namespace Prisma {
             args: Prisma.produtoCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.produtoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$produtoPayload>[]
+          }
           delete: {
             args: Prisma.produtoDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$produtoPayload>
@@ -827,6 +847,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.produtoUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.produtoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$produtoPayload>[]
           }
           upsert: {
             args: Prisma.produtoUpsertArgs<ExtArgs>
@@ -1231,7 +1255,23 @@ export namespace Prisma {
     criadoEm?: boolean
   }, ExtArgs["result"]["cadastro"]>
 
+  export type cadastroSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    sobrenome?: boolean
+    email?: boolean
+    senha?: boolean
+    criadoEm?: boolean
+  }, ExtArgs["result"]["cadastro"]>
 
+  export type cadastroSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    sobrenome?: boolean
+    email?: boolean
+    senha?: boolean
+    criadoEm?: boolean
+  }, ExtArgs["result"]["cadastro"]>
 
   export type cadastroSelectScalar = {
     id?: boolean
@@ -1372,6 +1412,30 @@ export namespace Prisma {
     createMany<T extends cadastroCreateManyArgs>(args?: SelectSubset<T, cadastroCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Cadastros and returns the data saved in the database.
+     * @param {cadastroCreateManyAndReturnArgs} args - Arguments to create many Cadastros.
+     * @example
+     * // Create many Cadastros
+     * const cadastro = await prisma.cadastro.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Cadastros and only return the `id`
+     * const cadastroWithIdOnly = await prisma.cadastro.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends cadastroCreateManyAndReturnArgs>(args?: SelectSubset<T, cadastroCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cadastroPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Cadastro.
      * @param {cadastroDeleteArgs} args - Arguments to delete one Cadastro.
      * @example
@@ -1434,6 +1498,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends cadastroUpdateManyArgs>(args: SelectSubset<T, cadastroUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Cadastros and returns the data updated in the database.
+     * @param {cadastroUpdateManyAndReturnArgs} args - Arguments to update many Cadastros.
+     * @example
+     * // Update many Cadastros
+     * const cadastro = await prisma.cadastro.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Cadastros and only return the `id`
+     * const cadastroWithIdOnly = await prisma.cadastro.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends cadastroUpdateManyAndReturnArgs>(args: SelectSubset<T, cadastroUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cadastroPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Cadastro.
@@ -1834,7 +1928,24 @@ export namespace Prisma {
      * The data used to create many cadastros.
      */
     data: cadastroCreateManyInput | cadastroCreateManyInput[]
-    skipDuplicates?: boolean
+  }
+
+  /**
+   * cadastro createManyAndReturn
+   */
+  export type cadastroCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cadastro
+     */
+    select?: cadastroSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the cadastro
+     */
+    omit?: cadastroOmit<ExtArgs> | null
+    /**
+     * The data used to create many cadastros.
+     */
+    data: cadastroCreateManyInput | cadastroCreateManyInput[]
   }
 
   /**
@@ -1863,6 +1974,32 @@ export namespace Prisma {
    * cadastro updateMany
    */
   export type cadastroUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update cadastros.
+     */
+    data: XOR<cadastroUpdateManyMutationInput, cadastroUncheckedUpdateManyInput>
+    /**
+     * Filter which cadastros to update
+     */
+    where?: cadastroWhereInput
+    /**
+     * Limit how many cadastros to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * cadastro updateManyAndReturn
+   */
+  export type cadastroUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cadastro
+     */
+    select?: cadastroSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the cadastro
+     */
+    omit?: cadastroOmit<ExtArgs> | null
     /**
      * The data used to update cadastros.
      */
@@ -2148,7 +2285,19 @@ export namespace Prisma {
     _count?: boolean | GeladinhoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["geladinho"]>
 
+  export type geladinhoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sabor?: boolean
+    valor?: boolean
+    criadoEm?: boolean
+  }, ExtArgs["result"]["geladinho"]>
 
+  export type geladinhoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sabor?: boolean
+    valor?: boolean
+    criadoEm?: boolean
+  }, ExtArgs["result"]["geladinho"]>
 
   export type geladinhoSelectScalar = {
     id?: boolean
@@ -2162,6 +2311,8 @@ export namespace Prisma {
     produto?: boolean | geladinho$produtoArgs<ExtArgs>
     _count?: boolean | GeladinhoCountOutputTypeDefaultArgs<ExtArgs>
   }
+  export type geladinhoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type geladinhoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $geladinhoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "geladinho"
@@ -2291,6 +2442,30 @@ export namespace Prisma {
     createMany<T extends geladinhoCreateManyArgs>(args?: SelectSubset<T, geladinhoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Geladinhos and returns the data saved in the database.
+     * @param {geladinhoCreateManyAndReturnArgs} args - Arguments to create many Geladinhos.
+     * @example
+     * // Create many Geladinhos
+     * const geladinho = await prisma.geladinho.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Geladinhos and only return the `id`
+     * const geladinhoWithIdOnly = await prisma.geladinho.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends geladinhoCreateManyAndReturnArgs>(args?: SelectSubset<T, geladinhoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$geladinhoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Geladinho.
      * @param {geladinhoDeleteArgs} args - Arguments to delete one Geladinho.
      * @example
@@ -2353,6 +2528,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends geladinhoUpdateManyArgs>(args: SelectSubset<T, geladinhoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Geladinhos and returns the data updated in the database.
+     * @param {geladinhoUpdateManyAndReturnArgs} args - Arguments to update many Geladinhos.
+     * @example
+     * // Update many Geladinhos
+     * const geladinho = await prisma.geladinho.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Geladinhos and only return the `id`
+     * const geladinhoWithIdOnly = await prisma.geladinho.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends geladinhoUpdateManyAndReturnArgs>(args: SelectSubset<T, geladinhoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$geladinhoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Geladinho.
@@ -2776,7 +2981,24 @@ export namespace Prisma {
      * The data used to create many geladinhos.
      */
     data: geladinhoCreateManyInput | geladinhoCreateManyInput[]
-    skipDuplicates?: boolean
+  }
+
+  /**
+   * geladinho createManyAndReturn
+   */
+  export type geladinhoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the geladinho
+     */
+    select?: geladinhoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the geladinho
+     */
+    omit?: geladinhoOmit<ExtArgs> | null
+    /**
+     * The data used to create many geladinhos.
+     */
+    data: geladinhoCreateManyInput | geladinhoCreateManyInput[]
   }
 
   /**
@@ -2809,6 +3031,32 @@ export namespace Prisma {
    * geladinho updateMany
    */
   export type geladinhoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update geladinhos.
+     */
+    data: XOR<geladinhoUpdateManyMutationInput, geladinhoUncheckedUpdateManyInput>
+    /**
+     * Filter which geladinhos to update
+     */
+    where?: geladinhoWhereInput
+    /**
+     * Limit how many geladinhos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * geladinho updateManyAndReturn
+   */
+  export type geladinhoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the geladinho
+     */
+    select?: geladinhoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the geladinho
+     */
+    omit?: geladinhoOmit<ExtArgs> | null
     /**
      * The data used to update geladinhos.
      */
@@ -3145,7 +3393,23 @@ export namespace Prisma {
     geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto"]>
 
+  export type produtoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    quantidade?: boolean
+    valor?: boolean
+    idGeladinho?: boolean
+    geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["produto"]>
 
+  export type produtoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    quantidade?: boolean
+    valor?: boolean
+    idGeladinho?: boolean
+    geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["produto"]>
 
   export type produtoSelectScalar = {
     id?: boolean
@@ -3157,6 +3421,12 @@ export namespace Prisma {
 
   export type produtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "quantidade" | "valor" | "idGeladinho", ExtArgs["result"]["produto"]>
   export type produtoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
+  }
+  export type produtoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
+  }
+  export type produtoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     geladinhos?: boolean | geladinhoDefaultArgs<ExtArgs>
   }
 
@@ -3289,6 +3559,30 @@ export namespace Prisma {
     createMany<T extends produtoCreateManyArgs>(args?: SelectSubset<T, produtoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Produtos and returns the data saved in the database.
+     * @param {produtoCreateManyAndReturnArgs} args - Arguments to create many Produtos.
+     * @example
+     * // Create many Produtos
+     * const produto = await prisma.produto.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Produtos and only return the `id`
+     * const produtoWithIdOnly = await prisma.produto.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends produtoCreateManyAndReturnArgs>(args?: SelectSubset<T, produtoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$produtoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Produto.
      * @param {produtoDeleteArgs} args - Arguments to delete one Produto.
      * @example
@@ -3351,6 +3645,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends produtoUpdateManyArgs>(args: SelectSubset<T, produtoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Produtos and returns the data updated in the database.
+     * @param {produtoUpdateManyAndReturnArgs} args - Arguments to update many Produtos.
+     * @example
+     * // Update many Produtos
+     * const produto = await prisma.produto.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Produtos and only return the `id`
+     * const produtoWithIdOnly = await prisma.produto.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends produtoUpdateManyAndReturnArgs>(args: SelectSubset<T, produtoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$produtoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Produto.
@@ -3775,7 +4099,28 @@ export namespace Prisma {
      * The data used to create many produtos.
      */
     data: produtoCreateManyInput | produtoCreateManyInput[]
-    skipDuplicates?: boolean
+  }
+
+  /**
+   * produto createManyAndReturn
+   */
+  export type produtoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the produto
+     */
+    select?: produtoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the produto
+     */
+    omit?: produtoOmit<ExtArgs> | null
+    /**
+     * The data used to create many produtos.
+     */
+    data: produtoCreateManyInput | produtoCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3820,6 +4165,36 @@ export namespace Prisma {
      * Limit how many produtos to update.
      */
     limit?: number
+  }
+
+  /**
+   * produto updateManyAndReturn
+   */
+  export type produtoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the produto
+     */
+    select?: produtoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the produto
+     */
+    omit?: produtoOmit<ExtArgs> | null
+    /**
+     * The data used to update produtos.
+     */
+    data: XOR<produtoUpdateManyMutationInput, produtoUncheckedUpdateManyInput>
+    /**
+     * Filter which produtos to update
+     */
+    where?: produtoWhereInput
+    /**
+     * Limit how many produtos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produtoIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3912,9 +4287,6 @@ export namespace Prisma {
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted',
-    ReadCommitted: 'ReadCommitted',
-    RepeatableRead: 'RepeatableRead',
     Serializable: 'Serializable'
   };
 
@@ -3960,31 +4332,6 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-  export const cadastroOrderByRelevanceFieldEnum: {
-    id: 'id',
-    nome: 'nome',
-    sobrenome: 'sobrenome',
-    email: 'email',
-    senha: 'senha'
-  };
-
-  export type cadastroOrderByRelevanceFieldEnum = (typeof cadastroOrderByRelevanceFieldEnum)[keyof typeof cadastroOrderByRelevanceFieldEnum]
-
-
-  export const geladinhoOrderByRelevanceFieldEnum: {
-    sabor: 'sabor'
-  };
-
-  export type geladinhoOrderByRelevanceFieldEnum = (typeof geladinhoOrderByRelevanceFieldEnum)[keyof typeof geladinhoOrderByRelevanceFieldEnum]
-
-
-  export const produtoOrderByRelevanceFieldEnum: {
-    nome: 'nome'
-  };
-
-  export type produtoOrderByRelevanceFieldEnum = (typeof produtoOrderByRelevanceFieldEnum)[keyof typeof produtoOrderByRelevanceFieldEnum]
 
 
   /**
@@ -4049,7 +4396,6 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     criadoEm?: SortOrder
-    _relevance?: cadastroOrderByRelevanceInput
   }
 
   export type cadastroWhereUniqueInput = Prisma.AtLeast<{
@@ -4105,7 +4451,6 @@ export namespace Prisma {
     valor?: SortOrder
     criadoEm?: SortOrder
     produto?: produtoOrderByRelationAggregateInput
-    _relevance?: geladinhoOrderByRelevanceInput
   }
 
   export type geladinhoWhereUniqueInput = Prisma.AtLeast<{
@@ -4160,7 +4505,6 @@ export namespace Prisma {
     valor?: SortOrder
     idGeladinho?: SortOrder
     geladinhos?: geladinhoOrderByWithRelationInput
-    _relevance?: produtoOrderByRelevanceInput
   }
 
   export type produtoWhereUniqueInput = Prisma.AtLeast<{
@@ -4375,7 +4719,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -4388,12 +4731,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type cadastroOrderByRelevanceInput = {
-    fields: cadastroOrderByRelevanceFieldEnum | cadastroOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type cadastroCountOrderByAggregateInput = {
@@ -4434,7 +4771,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -4485,12 +4821,6 @@ export namespace Prisma {
 
   export type produtoOrderByRelationAggregateInput = {
     _count?: SortOrder
-  }
-
-  export type geladinhoOrderByRelevanceInput = {
-    fields: geladinhoOrderByRelevanceFieldEnum | geladinhoOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type geladinhoCountOrderByAggregateInput = {
@@ -4559,12 +4889,6 @@ export namespace Prisma {
   export type GeladinhoScalarRelationFilter = {
     is?: geladinhoWhereInput
     isNot?: geladinhoWhereInput
-  }
-
-  export type produtoOrderByRelevanceInput = {
-    fields: produtoOrderByRelevanceFieldEnum | produtoOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type produtoCountOrderByAggregateInput = {
@@ -4696,7 +5020,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
@@ -4722,7 +5045,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -4828,7 +5150,6 @@ export namespace Prisma {
 
   export type produtoCreateManyGeladinhosInputEnvelope = {
     data: produtoCreateManyGeladinhosInput | produtoCreateManyGeladinhosInput[]
-    skipDuplicates?: boolean
   }
 
   export type produtoUpsertWithWhereUniqueWithoutGeladinhosInput = {
