@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Trash2, Plus, Search } from "lucide-react";
 import logo from '../../assets/logoG.svg';
 
-const data = Array(10).fill({
-  id: "",
-  nome: "",
-  quantidade: "",
-  preco: "",
-});
-
 export default function Geladinho() {
+  const [produtos, setProdutos] = useState([]);
+  const [mensagemErro, setMensagemErro] = useState('');
+
+  // 🔄 Carregar produtos do backend ao iniciar
+  useEffect(() => {
+    async function fetchProdutos() {
+      try {
+        const response = await fetch("http://localhost:3000/produto", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // ajuste se necessário
+          },
+        });
+
+        if (!response.ok) throw new Error("Erro ao buscar produtos");
+
+        const data = await response.json();
+        setProdutos(data);
+      } catch (error) {
+        setMensagemErro(error.message || "Erro inesperado");
+      }
+    }
+
+    fetchProdutos();
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#c9c9ff] p-4 sm:p-6 md:p-10 relative">
       <div className="max-w-7xl mx-auto flex flex-col gap-10">
@@ -19,7 +37,7 @@ export default function Geladinho() {
             <img src={logo} alt="Logo" className="w-10 h-10" />
             <h1 className="text-2xl font-bold text-[#1e1e1e]">GeladinhoPro</h1>
           </div>
-          
+
           <div className="hidden sm:flex gap-2">
             <button className="bg-primary hover:bg-white text-white font-semibold hover:text-primary border-2 rounded-md px-4 py-2 duration-200 flex items-center gap-2">
               <Search className="w-4 h-4" />
@@ -45,17 +63,25 @@ export default function Geladinho() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, idx) => (
-                <tr key={idx} className="border-t border-gray-700">
-                  <td className="px-4 py-2">{item.id}</td>
-                  <td className="px-4 py-2">{item.nome}</td>
-                  <td className="px-4 py-2">{item.quantidade}</td>
-                  <td className="px-4 py-2">{item.preco}</td>
-                  <td className="px-4 py-2">
-                    <Trash2 className="text-red-500 hover:text-red-700 cursor-pointer" />
+              {produtos.length > 0 ? (
+                produtos.map((item) => (
+                  <tr key={item.id} className="border-t border-gray-700">
+                    <td className="px-4 py-2">{item.id}</td>
+                    <td className="px-4 py-2">{item.nome}</td>
+                    <td className="px-4 py-2">{item.quantidade}</td>
+                    <td className="px-4 py-2">R$ {item.valor.toFixed(2)}</td>
+                    <td className="px-4 py-2">
+                      <Trash2 className="text-red-500 hover:text-red-700 cursor-pointer" />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td className="px-4 py-4 text-center" colSpan={5}>
+                    {mensagemErro || "Nenhum produto encontrado"}
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

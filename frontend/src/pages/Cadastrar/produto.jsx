@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/logoG.svg'; 
 import Form from '../../components/comp/Form'; 
+import { produtoSchema } from '../../../../backend/src/types/typeProduto'; // ajuste se necessário
 
 export default function Produto() {
-   
+  const [formData, setFormData] = useState({
+    nome: '',
+    quantidade: '',
+    valor: '',
+    idGeladinho: '', // obrigatoriamente necessário
+  });
+
+  const [mensagem, setMensagem] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Validação com o Zod
+      const dadosValidados = produtoSchema.parse({
+        nome: formData.nome,
+        quantidade: parseInt(formData.quantidade),
+        valor: parseFloat(formData.valor),
+        idGeladinho: parseInt(formData.idGeladinho),
+      });
+
+      // Envio para o backend
+      const response = await fetch('http://localhost:3000/produto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosValidados),
+      });
+
+      if (!response.ok) throw new Error('Erro ao cadastrar produto.');
+
+      setMensagem("Produto cadastrado com sucesso!");
+      setFormData({ nome: '', quantidade: '', valor: '', idGeladinho: '' });
+
+    } catch (error) {
+      if (error.errors) {
+        setMensagem("Preencha os campos corretamente.");
+      } else {
+        setMensagem(error.message || 'Erro desconhecido');
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#c9c9f7] flex items-center justify-center px-4">
@@ -14,12 +60,14 @@ export default function Produto() {
           <h1 className="text-2xl font-bold text-[#003366]">GeladinhoPro</h1>
         </div>
 
-        <form className="flex flex-col space-y-6">
+        <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
           <Form
             label="Nome do Produto"
             placeholder="Digite o nome"
-            id="sabor"
-            name="sabor"
+            id="nome"
+            name="nome"
+            value={formData.nome}
+            onChange={handleChange}
           />
           <Form
             label="Quantidade"
@@ -27,19 +75,34 @@ export default function Produto() {
             placeholder="0"
             id="quantidade"
             name="quantidade"
+            value={formData.quantidade}
+            onChange={handleChange}
           />
           <Form
             label="Preço"
             placeholder="R$"
-            id="preco"
-            name="preco"
+            id="valor"
+            name="valor"
+            value={formData.valor}
+            onChange={handleChange}
+          />
+          <Form
+            label="ID do Geladinho"
+            placeholder="ID do geladinho"
+            id="idGeladinho"
+            name="idGeladinho"
+            value={formData.idGeladinho}
+            onChange={handleChange}
           />
           <button
-            type="submit" 
+            type="submit"
             className="bg-[#003366] text-white font-semibold py-2 rounded-xl hover:bg-[#002244] transition duration-300"
           >
             Cadastrar
           </button>
+          {mensagem && (
+            <p className="text-center text-sm text-gray-700 mt-2">{mensagem}</p>
+          )}
         </form>
       </div>
     </div>
