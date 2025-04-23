@@ -4,7 +4,7 @@ import { geladinhoSchema } from "../types/typeGeladinho";
 
 export async function rotaGeladinho(app: FastifyInstance) {
     app.addHook('preHandler', async (req:FastifyRequest, reply: FastifyReply) => {
-        try{
+             try{
             await req.jwtVerify();
         }catch(err) {
             return reply.status(401).send({err, message: "erro ao autenticar."});

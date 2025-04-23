@@ -6,6 +6,7 @@ import { cadastrar, cadastroSchema } from "../types/typeCadastro";
 export async function rotaCadastro(app: FastifyInstance) {
     app.post('/cadastro', async (req: FastifyRequest, reply: FastifyReply) => {
         const bodyParsed: cadastrar = cadastroSchema.parse(req.body);
+        req.headers.authorization
         return new Cadastro().create(bodyParsed);
     });
 
