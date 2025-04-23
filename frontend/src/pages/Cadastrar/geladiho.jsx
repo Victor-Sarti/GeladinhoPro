@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import logo from '../../assets/logoG.svg'; 
-import Form from '../../components/comp/Form'; 
+import logo from '../../assets/logoG.svg';
+import Form from '../../components/comp/Form';
 import { geladinhoSchema } from '../../../../backend/src/types/typeGeladinho'; // Ajuste o caminho se necessário
 
 export default function Geladinho() {
@@ -18,35 +18,46 @@ export default function Geladinho() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      // Validação
-      const dadosValidados = geladinhoSchema.parse({
-        sabor: formData.sabor,
-        quantidade: parseInt(formData.quantidade),
-        valor: parseFloat(formData.valor),
-      });
+  try {
+    const dadosValidados = geladinhoSchema.parse({
+      sabor: formData.sabor,
+      quantidade: parseInt(formData.quantidade),
+      valor: parseFloat(formData.valor),
+    });
 
-      // Envio
-      const response = await fetch('http://localhost:3000/geladinho', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dadosValidados),
-      });
+    // Pegando o token do localStorage
+    const token = localStorage.getItem('token');
+    console.log("Token enviado:", token); 
 
-      if (!response.ok) throw new Error('Erro ao cadastrar geladinho');
-
-      setMensagem("Geladinho cadastrado com sucesso!");
-      setFormData({ sabor: '', quantidade: '', valor: '' });
-    } catch (error) {
-      if (error.errors) {
-        setMensagem("Preencha os campos corretamente.");
-      } else {
-        setMensagem(error.message || 'Erro desconhecido');
-      }
+    if (!token) {
+      setMensagem("Você precisa estar logado.");
+      return;
     }
-  };
+
+    // Envio
+    const response = await fetch('http://localhost:5000/geladinho', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Usando o token
+      },
+      body: JSON.stringify(dadosValidados),
+    });
+
+    if (!response.ok) throw new Error('Erro ao cadastrar geladinho');
+
+    setMensagem("Geladinho cadastrado com sucesso!");
+    setFormData({ sabor: '', quantidade: '', valor: '' });
+  } catch (error) {
+    if (error.errors) {
+      setMensagem("Preencha os campos corretamente.");
+    } else {
+      setMensagem(error.message || 'Erro desconhecido');
+    }
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#c9c9f7] flex items-center justify-center px-4">
