@@ -5,6 +5,7 @@ import { env } from "./utilities/enviroment";
 import { login } from "./routes/auth/Login";
 import { rotaProduto } from "./routes/produtoRoute";
 import { rotaGeladinho } from "./routes/geladinhoRoute";
+import cors from '@fastify/cors'
 
 const app = fastify({logger: true});
 
@@ -18,6 +19,11 @@ app.listen({port: 5000}, (err, address) => {
 app.register(fastifyJwt, {
     secret: env.SECRET
 });
+
+app.register(cors, {
+    origin: '*', 
+  });
+
 app.register(rotaCadastro);
 app.register(login);
 app.register(rotaProduto);
