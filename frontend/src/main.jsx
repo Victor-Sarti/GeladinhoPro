@@ -10,21 +10,57 @@ import CadGeladinho from './pages/Cadastrar/geladiho.jsx'
 import CadProduto from './pages/Cadastrar/produto.jsx'
 import Estoque from './pages/Estoque/Geladinho.jsx'
 import EstoqueP from './pages/Estoque/Produto.jsx'
+import PrivateRoute from './components/PrivateRoutes/PrivateRoute.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
-      <Navbar /> 
+      <Navbar />
       <Routes>
-
-        <Route path="/menu" element={<Menu />} />
         <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} /> 
-        <Route path="/cadastrargeladinho" element={<CadGeladinho />} /> 
-        <Route path="/cadastrarproduto" element={<CadProduto />} /> 
-        <Route path="/estoqueGeladinho" element={<Estoque />} /> 
-        <Route path="/estoqueProduto" element={<EstoqueP />} /> 
+        <Route path="/login" element={<Login />} />
 
+        {/* Rotas protegidas */}
+        <Route
+          path="/menu"
+          element={
+            <PrivateRoute>
+              <Menu />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/cadastrargeladinho"
+          element={
+            <PrivateRoute>
+              <CadGeladinho />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/cadastrarproduto"
+          element={
+            <PrivateRoute>
+              <CadProduto />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/estoqueGeladinho"
+          element={
+            <PrivateRoute>
+              <Estoque />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/estoqueProduto"
+          element={
+            <PrivateRoute>
+              <EstoqueP />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   </StrictMode>,
