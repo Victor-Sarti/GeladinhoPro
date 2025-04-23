@@ -6,17 +6,24 @@ export default function Geladinho() {
   const [produtos, setProdutos] = useState([]);
   const [mensagemErro, setMensagemErro] = useState('');
 
-  // 🔄 Carregar produtos do backend ao iniciar
+  // Função para carregar os produtos da API
   useEffect(() => {
     async function fetchProdutos() {
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+        setMensagemErro("Você precisa estar logado.");
+        return;
+      }
+
       try {
-        const response = await fetch("http://localhost:3000/produto", {
+        const response = await fetch("http://localhost:5000/geladinho", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // ajuste se necessário
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) throw new Error("Erro ao buscar produtos");
+        if (!response.ok) throw new Error("Erro ao buscar geladinhos");
 
         const data = await response.json();
         setProdutos(data);
@@ -31,7 +38,6 @@ export default function Geladinho() {
   return (
     <div className="min-h-screen bg-[#c9c9ff] p-4 sm:p-6 md:p-10 relative">
       <div className="max-w-7xl mx-auto flex flex-col gap-10">
-
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
             <img src={logo} alt="Logo" className="w-10 h-10" />
@@ -67,9 +73,12 @@ export default function Geladinho() {
                 produtos.map((item) => (
                   <tr key={item.id} className="border-t border-gray-700">
                     <td className="px-4 py-2">{item.id}</td>
-                    <td className="px-4 py-2">{item.nome}</td>
+                    <td className="px-4 py-2">{item.sabor}</td>
                     <td className="px-4 py-2">{item.quantidade}</td>
-                    <td className="px-4 py-2">R$ {item.valor.toFixed(2)}</td>
+                    <td className="px-4 py-2">
+                      {/* Verificar se item.valor é um número válido */}
+                      R$ {(isNaN(item.valor) ? 0 : Number(item.valor)).toFixed(2)}
+                    </td>
                     <td className="px-4 py-2">
                       <Trash2 className="text-red-500 hover:text-red-700 cursor-pointer" />
                     </td>
