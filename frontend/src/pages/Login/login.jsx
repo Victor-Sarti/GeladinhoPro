@@ -4,22 +4,40 @@ import Form from '../../components/comp/Form';
 import logo from '../../assets/logoG.svg';
 
 export default function Login() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Verificação das credenciais de admin
-    if (email === "admin@admin.com" && password === "admin123") {
-      setError('');
-      navigate('/menu');
-    } else {
-      setError('Email ou senha incorretos!');
+  
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          senha: password,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setError('');
+        localStorage.setItem('token', data.token); // Armazena o token no localStorage
+        navigate('/menu');
+      } else {
+        setError(data.message || data.messege || 'Email ou senha incorretos!');
+      }
+    } catch (err) {
+      setError('Erro ao conectar com o servidor.');
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#b3b3ff] px-4">
