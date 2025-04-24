@@ -6,6 +6,7 @@ class Geladinho {
         const query = await prisma.geladinho.create({
             data: {
                 sabor: body.sabor,
+                quantidade: body.quantidade,
                 valor: body.valor
             },
             include: {produto: true}

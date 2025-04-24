@@ -126,6 +126,7 @@ exports.Prisma.CadastroScalarFieldEnum = {
 exports.Prisma.GeladinhoScalarFieldEnum = {
   id: 'id',
   sabor: 'sabor',
+  quantidade: 'quantidade',
   valor: 'valor',
   criadoEm: 'criadoEm'
 };

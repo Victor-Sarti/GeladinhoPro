@@ -24,11 +24,12 @@ model cadastro {
 }
 
 model geladinho {
-  id       Int       @id @default(autoincrement())
-  sabor    String
-  valor    Decimal
-  criadoEm DateTime  @default(now())
-  produto  produto[] @relation("produtos")
+  id         Int       @id @default(autoincrement())
+  sabor      String
+  quantidade Int @default(0)
+  valor      Decimal
+  criadoEm   DateTime  @default(now())
+  produto    produto[] @relation("produtos")
 }
 
 model produto {
