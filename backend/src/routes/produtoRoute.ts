@@ -15,7 +15,7 @@ export async function rotaProduto(app: FastifyInstance) {
         const bodyParsed: produto = produtoSchema.parse(req.body);
         const instanceService = new Produto();
         return await instanceService.create(bodyParsed);
-    });
+    });  
     app.get('/produto', async (req: FastifyRequest, reply: FastifyReply) => {
         const instanceService = new Produto();
         return await instanceService.getAll();

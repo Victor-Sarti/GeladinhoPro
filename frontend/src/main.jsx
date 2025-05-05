@@ -11,7 +11,7 @@ import CadProduto from './pages/Cadastrar/produto.jsx'
 import Estoque from './pages/Estoque/Geladinho.jsx'
 import EstoqueP from './pages/Estoque/Produto.jsx'
 import PrivateRoute from './components/PrivateRoutes/PrivateRoute.jsx';
-
+import RelatorioPa from './pages/RelatorioPa/RelatorioPa.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
@@ -58,6 +58,14 @@ createRoot(document.getElementById('root')).render(
           element={
             <PrivateRoute>
               <EstoqueP />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/relatorio"
+          element={
+            <PrivateRoute>
+              < RelatorioPa />
             </PrivateRoute>
           }
         />

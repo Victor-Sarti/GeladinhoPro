@@ -39,7 +39,7 @@ export default function Menu() {
             Estoque Produto
           </button>
           <button
-            onClick={() => navigate('/relatorios')}
+            onClick={() => navigate('/relatorio')}
             className="bg-[#003366] text-white py-3 rounded-lg hover:bg-[#002244] transition"
           >
             Relatórios
