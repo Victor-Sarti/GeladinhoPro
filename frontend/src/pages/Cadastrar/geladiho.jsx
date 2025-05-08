@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logoG.svg';
 import Form from '../../components/comp/Form';
-import { geladinhoSchema } from '../../../../backend/src/types/typeGeladinho'; // Ajuste o caminho se necessário
+import { schemaCreatGeladin  } from '../../../../backend/src/types/typeGeladinho'; // Ajuste o caminho se necessário
 
 export default function Geladinho() {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ export default function Geladinho() {
   e.preventDefault();
 
   try {
-    const dadosValidados = geladinhoSchema.parse({
+    const dadosValidados = schemaCreatGeladin.parse({
       sabor: formData.sabor,
       quantidade: parseInt(formData.quantidade),
       valor: parseFloat(formData.valor),
