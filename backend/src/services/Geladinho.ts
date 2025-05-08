@@ -1,8 +1,8 @@
-import { geladinho, patchGeladin } from "../types/typeGeladinho";
+import { geladinho, geladinhoCreate, patchGeladin } from "../types/typeGeladinho";
 import { prisma } from "../utilities/dbClient"
 
 class Geladinho {
-    async create(body: geladinho) {
+    async create(body: geladinhoCreate) {
         const query = await prisma.geladinho.create({
             data: {
                 sabor: body.sabor,

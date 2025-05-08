@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { Geladinho } from "../services/Geladinho";
-import { geladinhoSchema, patchGeladin } from "../types/typeGeladinho";
+import { geladinho, geladinhoCreate, geladinhoSchema, patchGeladin, schemaCreatGeladin } from "../types/typeGeladinho";
 
 export async function rotaGeladinho(app: FastifyInstance) {
     app.addHook('preHandler', async (req:FastifyRequest, reply: FastifyReply) => {
@@ -12,7 +12,7 @@ export async function rotaGeladinho(app: FastifyInstance) {
     });
     app.post('/geladinho', async (req:FastifyRequest, reply: FastifyReply) => {
         const instanceService = new Geladinho();
-        const bodyParsed = geladinhoSchema.parse(req.body);
+        const bodyParsed: geladinhoCreate = schemaCreatGeladin.parse(req.body);
         return await instanceService.create(bodyParsed);
     });
     app.get('/geladinho', async (req:FastifyRequest, reply: FastifyReply) => {
