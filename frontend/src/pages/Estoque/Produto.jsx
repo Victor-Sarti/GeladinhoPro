@@ -1,11 +1,73 @@
 import React, { useEffect, useState } from "react";
-import { Trash2, Plus, Search } from "lucide-react";
+import { Trash2, Plus, Search, SquarePen } from "lucide-react";
 import logo from '../../assets/logoG.svg';
 
 export default function Geladinho() {
 
   const [produtos, setProdutos] = useState([]);
   const [mensagemErro, setMensagemErro] = useState('')
+
+  //formulario para update 
+
+  const [editandoId, setEditandoId] = useState(null);
+  const [formData, setFormData] = useState({
+    nome: "",
+    quantidade: 0,
+    valor: 0,
+  });
+
+  function iniciarEdicao(item) {
+    setEditandoId(item.id);
+    setFormData({
+      nome: item.nome,
+      quantidade: item.quantidade,
+      valor: item.valor,
+    });
+  }
+
+
+  //função upate
+
+  async function handleUpdate(id, dadosAtualizados) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`http://localhost:5000/produto/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dadosAtualizados),
+    });
+
+    if (response.ok) {
+      alert("Atualizado com sucesso!");
+      window.location.reload();
+    } else {
+      alert("Erro ao atualizar geladinho.");
+    }
+  }
+
+// função delete 
+
+  async function handleDelete(id) {
+    const token = localStorage.getItem("token")
+
+    const response = await fetch(`http://localhost:5000/produto/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      setProdutos(produtos.filter((item) => item.id !== id));
+    } else {
+      alert("Erro ao deletar");
+    }
+
+  }
+
 
   useEffect(() => {
     async function fetchProdutos() {
@@ -20,10 +82,10 @@ export default function Geladinho() {
             }
           }
         );
-        if(!fetchData.ok) throw new Error("erro ao buscar produtos.");
+        if (!fetchData.ok) throw new Error("erro ao buscar produtos.");
         const data = await fetchData.json();
         setProdutos(data);
-      } catch(error) {
+      } catch (error) {
         setMensagemErro(error.message || "Erro inesperado");
       }
     }
@@ -63,7 +125,7 @@ export default function Geladinho() {
                 <th className="px-4 py-3">Nome Produto</th>
                 <th className="px-4 py-3">Quantidade</th>
                 <th className="px-4 py-3">Preço</th>
-                <th className="px-4 py-3">Alterar / Excluir</th>
+                <th className="px-4 py-3">Excluir / Alterar</th>
               </tr>
             </thead>
             <tbody>
@@ -75,21 +137,75 @@ export default function Geladinho() {
                     <td className="px-4 py-2">{item.quantidade}</td>
                     <td className="px-4 py-2">
                       R${(isNaN(item.valor) ? 0 : Number(item.valor)).toFixed(2)}
-                      </td>
-                    <td className="px-4 py-2">
-                      <Trash2 className="text-red-500 hover:text-red-700 cursor-pointer" />
+                    </td>
+                    <td className="px-4 py-2 flex gap-12">
+                      <Trash2 className="text-red-500 hover:text-red-700 cursor-pointer" onClick={() => handleDelete(item.id)} />
+                      <SquarePen className=" text-purple-300 hover:text-purple-700 cursor-pointer" onClick={() => iniciarEdicao(item)} />
+
                     </td>
                   </tr>
-              ))
-            ) : (
-              <tr>
+                ))
+              ) : (
+                <tr>
                   <td className="px-4 py-4 text-center" colSpan={5}>
                     {mensagemErro || "Nenhum produto encontrado"}
                   </td>
                 </tr>
-            )}
+              )}
             </tbody>
           </table>
+          {/* formulario para update */}
+          {editandoId && (
+            <div className=" p-4 rounded-lg shadow mt-6 max-w-md mx-auto">
+              <h2 className="text-xl font-semibold mb-4">Editar Produto</h2>
+              <label className="block mb-2">
+                Produto:
+                <input
+                  className="w-full bg-black border p-2 rounded"
+                  type="text"
+                  value={formData.nome}
+                  onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                />
+              </label>
+              <label className="block mb-2">
+                Quantidade:
+                <input
+                  className="w-full  bg-black border p-2 rounded"
+                  type="number"
+                  value={formData.quantidade}
+                  onChange={(e) =>
+                    setFormData({ ...formData, quantidade: Number(e.target.value) })
+                  }
+                />
+              </label>
+              <label className="block mb-4">
+                Preço:
+                <input
+                  className="w-full bg-black border p-2 rounded"
+                  type="number"
+                  step="0.01"
+                  value={formData.valor}
+                  onChange={(e) =>
+                    setFormData({ ...formData, valor: Number(e.target.value) })
+                  }
+                />
+              </label>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => handleUpdate(editandoId, formData)}
+                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                >
+                  Salvar
+                </button>
+                <button
+                  onClick={() => setEditandoId(null)}
+                  className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
