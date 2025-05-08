@@ -2,7 +2,10 @@ import { coerce, number, string, z, ZodSchema } from "zod";
 import { produtoSchema } from "./typeProduto";
 
 export const geladinhoSchema = z.object({
-  id: number().int().optional(),
+  id: z.union([
+    z.number().int(),
+    z.string().transform((val) => parseInt(val, 10))
+  ]),
   sabor: string(),
   quantidade: z.union([
     z.number().int(),
@@ -17,3 +20,4 @@ export const geladinhoSchema = z.object({
 });
 
 export type geladinho = z.infer<typeof geladinhoSchema>;
+export type patchGeladin = Omit<geladinho, "id" | "criadoEm" | "produto">

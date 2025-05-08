@@ -20,4 +20,15 @@ export async function rotaProduto(app: FastifyInstance) {
         const instanceService = new Produto();
         return await instanceService.getAll();
     });
+    app.delete('/produto/:id', async (req: FastifyRequest, reply: FastifyReply) => {
+        const {id} = req.params as {id: string};
+        const instanceService = new Produto();
+        return await instanceService.delete(Number(id));
+    });
+    app.patch('/produto/:id', async (req: FastifyRequest, reply: FastifyReply) => {
+        const instanceService = new Produto();
+        const {id} = req.params as {id: string};
+        const body: produto = req.body as produto;
+        return await instanceService.update(body, Number(id));
+    });
 }

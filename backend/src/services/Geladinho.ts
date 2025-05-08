@@ -1,4 +1,4 @@
-import { geladinho } from "../types/typeGeladinho";
+import { geladinho, patchGeladin } from "../types/typeGeladinho";
 import { prisma } from "../utilities/dbClient"
 
 class Geladinho {
@@ -25,6 +25,28 @@ class Geladinho {
             }
         });
         return query;
+    }
+    async update(body: patchGeladin, id: number) {
+    
+        const query = await prisma.geladinho.update({
+            where: {
+                id: id
+            },
+            data: {
+                sabor: body.sabor,
+                quantidade: body.quantidade,
+                valor: body.valor
+            }
+        });
+        return {message: "Updated!", query}
+    }
+    async delete(id: number) {
+        const query = await prisma.geladinho.delete({
+            where: {
+                id: id
+            }
+        });
+        return {message: "successfully deleted!"}
     }
 }
 

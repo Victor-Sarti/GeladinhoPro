@@ -14,5 +14,17 @@ export async function rotaCadastro(app: FastifyInstance) {
         return new Cadastro().getAll();
     });
 
+    app.patch('/cadastro/:id', async (req: FastifyRequest, reply: FastifyReply) => {
+        const instanceService = new Cadastro();
+        const {id} = req.params as {id: string}
+        const body: cadastrar = req.body as cadastrar;
+        return await instanceService.update(body, id);
+    });
+
+    app.delete('/cadastro/:id', async (req: FastifyRequest, reply: FastifyReply) => {
+        const instanceService = new Cadastro();
+        const {id} = req.params as {id: string};
+        return await instanceService.delete(id);
+    });
 
 }

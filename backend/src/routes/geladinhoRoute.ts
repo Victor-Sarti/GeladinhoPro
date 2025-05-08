@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { Geladinho } from "../services/Geladinho";
-import { geladinhoSchema } from "../types/typeGeladinho";
+import { geladinhoSchema, patchGeladin } from "../types/typeGeladinho";
 
 export async function rotaGeladinho(app: FastifyInstance) {
     app.addHook('preHandler', async (req:FastifyRequest, reply: FastifyReply) => {
@@ -18,5 +18,16 @@ export async function rotaGeladinho(app: FastifyInstance) {
     app.get('/geladinho', async (req:FastifyRequest, reply: FastifyReply) => {
         const instanceService = new Geladinho();
         return await instanceService.getAll();
+    });
+    app.patch('/geladinho/:id', async (req:FastifyRequest, reply: FastifyReply) => {
+        const instanceService = new Geladinho();
+        const {id} = req.params as {id: string}
+        const body: patchGeladin = req.body as patchGeladin;
+        return await instanceService.update(body, Number(id));
+    });
+    app.delete('/geladinho/:id', async (req:FastifyRequest, reply: FastifyReply) => {
+        const instanceService = new Geladinho();
+        const { id } = req.params as {id: string}
+        return await instanceService.delete(Number(id));
     });
 }
