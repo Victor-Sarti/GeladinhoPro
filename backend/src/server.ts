@@ -22,6 +22,7 @@ app.register(fastifyJwt, {
 
 app.register(cors, {
     origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', "PATCH"],
   });
 
 app.register(rotaCadastro);
